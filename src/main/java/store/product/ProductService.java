@@ -41,4 +41,21 @@ public class ProductService {
             .map(ProductModel::to)
             .toList();
     }    
+
+    public Product findById(String id) {
+        return productRepository.findById(id)
+            .map(ProductModel::to)
+            .orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Product not found"
+            ));
+    }
+
+    public void delete(String id) {
+        if (!productRepository.existsById(id)) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Product not found"
+            );
+        }
+        productRepository.deleteById(id);
+    }
 }

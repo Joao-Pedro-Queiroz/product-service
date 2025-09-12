@@ -15,13 +15,10 @@ public class ProductResource implements ProductController {
 
     @Override
     public ResponseEntity<ProductOut> create(ProductIn in) {
-        // parser ProductIn to Product
         Product product = ProductParser.to(in);
 
         Product saved = productService.create(product);
 
-        // parser Product to ProductOut and build to
-        // HATEAOS standard
         return ResponseEntity.created(
             ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -32,8 +29,10 @@ public class ProductResource implements ProductController {
 
     @Override
     public ResponseEntity<ProductOut> findById(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        Product product = productService.findById(id);
+        return ResponseEntity
+        .ok()
+        .body(ProductParser.to(product));
     }
 
     @Override
@@ -45,8 +44,8 @@ public class ProductResource implements ProductController {
 
     @Override
     public ResponseEntity<Void> delete(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        productService.delete(id);
+        return ResponseEntity.noContent().build(); // 204
     }
     
 }
