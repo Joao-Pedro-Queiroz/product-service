@@ -4,5 +4,5 @@ CREATE TABLE product
     name varchar(255) NOT NULL,
     price decimal(10,2) NOT NULL,
     unit varchar(50) NOT NULL,
-    CONSTRAINT account_pkey PRIMARY KEY (id)
+    CONSTRAINT product_pkey PRIMARY KEY (id)
 )
