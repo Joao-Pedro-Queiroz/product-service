@@ -22,7 +22,3 @@ spring:
     properties:
       hibernate:
         default_schema: product
-
-logging:
-  level:
-    store: debug
